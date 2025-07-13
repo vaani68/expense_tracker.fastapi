@@ -1,0 +1,104 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Login</title>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+      <style>
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Inter', sans-serif;
+          background: url('/static/login-banner.png') no-repeat center center fixed;
+          background-size: cover;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .form-container {
+          background-color: rgba(255, 255, 255, 0.95);
+          padding: 40px 30px;
+          border-radius: 10px;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          width: 90%;
+          max-width: 400px;
+          text-align: center;
+        }
+
+        .form-container h2 {
+          margin-bottom: 20px;
+        }
+
+        input {
+          width: 90%;
+          padding: 10px;
+          margin: 10px 0;
+          font-size: 14px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+
+        button {
+          padding: 10px 20px;
+          background-color: #1d3557;
+          color: white;
+          border: none;
+          font-size: 16px;
+          cursor: pointer;
+          border-radius: 4px;
+          margin-top: 10px;
+        }
+
+        p {
+          margin-top: 15px;
+        }
+
+        a {
+          color: #457b9d;
+          text-decoration: none;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="form-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <input type="text" id="username" placeholder="Username" required><br>
+          <input type="password" id="password" placeholder="Password" required><br>
+          <button type="submit">Login</button>
+        </form>
+
+        <p>New user? <a href="/static/register.html">Register here</a></p>
+      </div>
+
+  <script>
+    const api = window.location.origin;
+
+    document.getElementById("loginForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const res = await fetch(`${api}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        //alert("Login successful!");
+        localStorage.setItem("token", data.access_token);
+        window.location.href = "/"; // Goes to index.html
+      } else {
+        alert("Wrong" + data.detail);
+      }
+    });
+  </script>
+</body>
+</html>

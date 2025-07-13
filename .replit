@@ -3,6 +3,7 @@ modules = ["python-3.11"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["libxcrypt", "lsof"]
 
 [unitTest]
 language = "python3"
@@ -11,5 +12,9 @@ language = "python3"
 requiredFiles = [".replit", "replit.nix"]
 
 [deployment]
-run = ["python3", "main.py"]
+run = ["bash", "main.sh"]
 deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 8000
+externalPort = 80
