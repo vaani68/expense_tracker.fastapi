@@ -19,6 +19,12 @@ A multi-user expense tracker built with **FastAPI**, **SQLite**, and vanilla **H
 - JWT auth with `python-jose`
 
 ---
+
+## Demo
+Watch Demo -(https://github.com/vaani68/expense_tracker.fastapi/blob/main/Demo.mp4) 
+
+---
+
 ## Run Locally
 
 ```bash
